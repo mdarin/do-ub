@@ -1,10 +1,10 @@
 #!/bin/bash
-#
+#####
 # docker autoinstaller script for ubuntu linux 
 # v.1
 # 
 # [https://docs.docker.com/install/linux/docker-ce/ubuntu/#set-up-the-repository]
-#
+####
 
 echo
 echo "$(lsb_release -cr)"
