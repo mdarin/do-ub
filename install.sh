@@ -109,3 +109,6 @@ echo
 echo "This command downloads a test image and runs it in a container."
 echo " When the container runs, it prints an informational message and exits."
 echo "That's it! :)"
+
+
+
