@@ -6,37 +6,50 @@
 # [https://docs.docker.com/install/linux/docker-ce/ubuntu/#set-up-the-repository]
 ####
 
-echo
+echo "script: $0"
+echo "workdir: $(dirname $0)"			# винтажный вариант `dirname $0`
+echo "scriptname: $(basename $0)" # винтажный вариант `basename $0`
+root=$(pwd) # аналогично `pwd` более модерновая версия
+echo "working root: $root"
 echo "$(lsb_release -cr)"
-echo 
-#sleep 1
 
-echo "sudo exmaple:"
-echo "echo \$passwd | sudo -S apt-get install -y git"
+password=""
+if [ -n "$1" ]              
+then
+	password=$1
+	shift
+	echo "password: $password"
+else
+	echo "You should define sudo password!"     
+	exit 1
+fi
+##### DEBUG
+#exit 0
 
 echo "### Setting up the repository ###"
 echo "#################################"
 echo "Updating the apt package index:"
 
-echo "$ sudo apt-get update"
+echo $password | sudo -S apt-get update
 
 echo "Installing packages to allow apt to use a repository over HTTPS:"
 
-echo "$ sudo apt-get install apt-transport-https ca-certificates curl software-properties-common"
+echo $password | sudo -S apt-get install -y apt-transport-https ca-certificates curl software-properties-common
 
 echo "Adding Docker’s official GPG key:"
 
-echo "$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -"
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
+echo
 echo "Verifeing that you now have the key with the fingerprint" 
 echo "  9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88" 
 echo "by searching for the last 8 characters of the fingerprint."
-
-echo "$ sudo apt-key fingerprint 0EBFCD88"
+echo
+echo $password | sudo -S apt-key fingerprint 0EBFCD88
 
 echo "Use the following command to set up the stable repository."
 
-echo "$ sudo add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\""
+echo $password | sudo -S add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
 echo 
 echo 
@@ -46,17 +59,17 @@ echo "############################"
 
 echo "Updating the apt package index"
 
-echo "$ sudo apt-get update"
+echo $password | sudo -S apt-get update
 
 echo "Installing the latest version of Docker CE"
 
-echo "$ sudo apt-get install docker-ce"
+echo $password | sudo -S apt-get install -y docker-ce
 
 echo "The Docker daemon starts automatically."
 
 echo "Verify that Docker CE is installed correctly by running the hello-world image."
 
-echo "$ sudo docker run hello-world"
+echo $password | sudo -S docker run hello-world
 
 echo "This command downloads a test image and runs it in a container."
 echo "When the container runs, it prints an informational message and exits."
@@ -77,11 +90,11 @@ echo "############################################################"
 
 echo "Creating the docker group"
 
-echo "$ sudo groupadd docker"
+echo $password | sudo -S groupadd docker
 
 echo "Adding your user to the docker group"
 
-echo "$ sudo usermod -aG docker $USER"
+echo $password | sudo -S usermod -aG docker $USER
 
 echo "Log out and log back in so that your group membership is re-evaluated."
 echo
