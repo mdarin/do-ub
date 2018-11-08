@@ -25,9 +25,11 @@ else
 fi
 ##### DEBUG
 #exit 0
-
+echo
+echo
 echo "### Setting up the repository ###"
 echo "#################################"
+echo
 echo "Updating the apt package index:"
 
 echo $password | sudo -S apt-get update
@@ -56,7 +58,7 @@ echo
 
 echo "### Installing Docker CE ###"
 echo "############################"
-
+echo
 echo "Updating the apt package index"
 
 echo $password | sudo -S apt-get update
@@ -85,9 +87,9 @@ echo "run Docker commands and for other optional configuration steps."
  
 echo
 echo
-echo "####Creating the docker group and add your user\(\$USER\)###"
-echo "############################################################"
-
+echo "### Creating the docker group and add your user\(\$USER\) ###"
+echo "#############################################################"
+echo
 echo "Creating the docker group"
 
 echo $password | sudo -S groupadd docker
@@ -107,7 +109,24 @@ echo
 echo "$ docker run hello-world"
 echo
 echo "This command downloads a test image and runs it in a container."
-echo " When the container runs, it prints an informational message and exits."
+echo "When the container runs, it prints an informational message and exits."
+echo
+echo
+echo "### Installing Compose on Linux systems ###"
+echo "###########################################"
+echo
+echo "Downloading the latest version of Docker Compose"
+
+echo $password | sudo -S curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+echo "Applying executable permissions to the binary"
+
+echo $password | sudo -S chmod +x /usr/local/bin/docker-compose
+
+echo
+echo "$(docker --version)"
+echo "$(docker-compose --version)"
+echo
 echo "That's it! :)"
 
 
