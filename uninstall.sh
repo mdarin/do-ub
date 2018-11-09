@@ -13,6 +13,7 @@ else
 	echo "You should define sudo password!"     
 	exit 1
 fi
+
 echo
 echo
 echo "### Uninstalling the Docker CE package ###"
