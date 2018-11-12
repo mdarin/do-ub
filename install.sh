@@ -79,8 +79,8 @@ echo "Continue to Linux postinstall to allow non-privileged users to"
 echo "run Docker commands and for other optional configuration steps."
 echo
 echo
-echo "### Creating the docker group and add your user\(\$USER\) ###"
-echo "#############################################################"
+echo "### Creating the docker group and add your user(\$USER\ ###"
+echo "###########################################################"
 echo
 echo "Creating the docker group"
 echo $password | sudo -S groupadd docker
@@ -116,6 +116,7 @@ echo "$(docker --version)"
 echo "$(docker-compose --version)"
 echo
 echo "That's it! :)"
+
 exit 0
 
 

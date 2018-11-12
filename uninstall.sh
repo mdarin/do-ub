@@ -29,8 +29,8 @@ echo
 echo "Deleting \'docker\' group"
 echo $password | sudo -S groupdel docker
 echo
-echo "Excluding $USER from \'docker\' group"
-echo $password | sudo -S gpasswd -d $USER docker
+#echo "Excluding $USER from \'docker\' group"
+#echo $password | sudo -S gpasswd -d $USER docker
 #TODO update groups of $USER
 echo
 echo "Cleaning up"
@@ -53,4 +53,5 @@ echo
 echo "WARNING! You must delete any edited configuration files manually."
 echo
 echo
+
 exit 0
